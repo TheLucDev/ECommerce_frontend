@@ -1,29 +1,41 @@
-const backendDomain = "http://localhost:8080";
+const backendDomain = 'http://localhost:8080';
 
 const SummaryApi = {
   signUp: {
     url: `${backendDomain}/api/signup`,
-    method: "post",
+    method: 'post',
   },
   signIn: {
     url: `${backendDomain}/api/signin`,
-    method: "post",
+    method: 'post',
   },
   userDetails: {
     url: `${backendDomain}/api/user-details`,
-    method: "get",
+    method: 'get',
   },
   logout_user: {
     url: `${backendDomain}/api/userLogout`,
-    method: "get",
+    method: 'get',
   },
   allUser: {
     url: `${backendDomain}/api/all-user`,
-    method: "get",
+    method: 'get',
   },
   updateUser: {
     url: `${backendDomain}/api/update-user`,
-    method: "post",
+    method: 'post',
+  },
+  uploadProduct: {
+    url: `${backendDomain}/api/upload-product`,
+    method: 'post',
+  },
+  getProduct: {
+    url: `${backendDomain}/api/get-product`,
+    method: 'get',
+  },
+  updateProduct: {
+    url: `${backendDomain}/api/update-product`,
+    method: 'post',
   },
 };
 

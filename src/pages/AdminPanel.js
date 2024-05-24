@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
-import { FaRegUserCircle } from "react-icons/fa";
-import { useSelector } from "react-redux";
-import { Link, Outlet, useNavigate } from "react-router-dom";
-import ROLE from "../common/role";
+import React, { useEffect } from 'react';
+import { FaRegUserCircle } from 'react-icons/fa';
+import { useSelector } from 'react-redux';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
+import ROLE from '../common/role';
 
 const AdminPanel = () => {
   const navigate = useNavigate();
@@ -10,9 +10,10 @@ const AdminPanel = () => {
 
   useEffect(() => {
     if (user?.role !== ROLE.ADMIN) {
-      navigate("/");
+      navigate('/');
     }
   }, [user]);
+
   return (
     <div className="min-h-[calc(100vh-100px)] md:flex hidden">
       <aside className="bg-white min-h-full w-full max-w-60 customShadow">
@@ -34,10 +35,10 @@ const AdminPanel = () => {
         {/* navigation */}
         <div>
           <nav className="grid">
-            <Link to={"all-user"} className="p-2 py-1 hover:bg-slate-100">
+            <Link to={'all-user'} className="p-2 py-1 hover:bg-slate-100">
               All Users
             </Link>
-            <Link to={"all-product"} className="p-2 py-1 hover:bg-slate-100">
+            <Link to={'all-product'} className="p-2 py-1 hover:bg-slate-100">
               Product
             </Link>
           </nav>

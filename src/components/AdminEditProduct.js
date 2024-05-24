@@ -1,23 +1,25 @@
 import React, { useState } from 'react';
-import { IoMdClose } from 'react-icons/io';
-import productCategory from '../helpers/productCategory';
-import { FaCloudUploadAlt } from 'react-icons/fa';
-import uploadImage from '../helpers/uploadImage';
-import { MdDelete } from 'react-icons/md';
 import DisplayImage from './DisplayImage';
-import SummaryApi from '../common';
+import { MdDelete } from 'react-icons/md';
+import { FaCloudUploadAlt } from 'react-icons/fa';
+import productCategory from '../helpers/productCategory';
+import { IoMdClose } from 'react-icons/io';
+import uploadImage from '../helpers/uploadImage';
 import { toast } from 'react-toastify';
+import SummaryApi from '../common';
 
-const UploadProduct = ({ onClose, fetchData }) => {
+const AdminEditProduct = ({ onClose, productData, fetchdata }) => {
   const [data, setData] = useState({
-    productName: '',
-    brandName: '',
-    category: '',
-    productImage: [],
-    description: '',
-    price: '',
-    sellingPrice: '',
+    ...productData,
+    productName: productData?.productName,
+    brandName: productData?.brandName,
+    category: productData?.category,
+    productImage: productData?.productImage || [],
+    description: productData?.description,
+    price: productData?.price,
+    sellingPrice: productData?.sellingPrice,
   });
+  console.log(data, 'data');
   const [openFullScreenImage, setOpenFullScreenImage] = useState(false);
   const [fullScreenImage, setFullScreenImage] = useState('');
 
@@ -34,7 +36,7 @@ const UploadProduct = ({ onClose, fetchData }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await fetch(SummaryApi.uploadProduct.url, {
+    const response = await fetch(SummaryApi.updateProduct.url, {
       method: SummaryApi.uploadProduct.method,
       credentials: 'include',
       headers: {
@@ -49,7 +51,7 @@ const UploadProduct = ({ onClose, fetchData }) => {
     if (responseData.success) {
       toast.success(responseData?.message);
       onClose();
-      fetchData();
+      fetchdata();
     }
 
     if (responseData.error) {
@@ -80,12 +82,11 @@ const UploadProduct = ({ onClose, fetchData }) => {
       };
     });
   };
-
   return (
     <div className="fixed bg-slate-200 bg-opacity-35 w-full h-full top-0 left-0 right-0 bottom-0 flex justify-center items-center">
       <div className="bg-white p-4 rounded w-full max-w-2xl h-full max-h-[80%] overflow-hidden">
         <div className="flex justify-between items-center pb-3">
-          <h2 className="font-bold text-lg">Upload Product</h2>
+          <h2 className="font-bold text-lg">Edit Product</h2>s
           <div
             className="transition-all w-fit ml-auto text-2xl hover:text-red-600 cursor-pointer"
             onClick={onClose}
@@ -157,7 +158,6 @@ const UploadProduct = ({ onClose, fetchData }) => {
                 <input
                   type="file"
                   id="uploadImageInput"
-                  name="uploadImageInput"
                   className="hidden"
                   onChange={handleUploadProduct}
                 />
@@ -240,7 +240,7 @@ const UploadProduct = ({ onClose, fetchData }) => {
           ></textarea>
 
           <button className="px-3 py-2 bg-red-600 text-white mb-10 hover:bg-red-700">
-            Upload Product
+            Update Product
           </button>
         </form>
       </div>
@@ -256,4 +256,4 @@ const UploadProduct = ({ onClose, fetchData }) => {
   );
 };
 
-export default UploadProduct;
+export default AdminEditProduct;
